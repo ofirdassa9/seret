@@ -10,4 +10,13 @@ serve({
     denoDeploy({ modules }),
     react({ ssr: true }),
   ],
+  middlewares: [
+    {
+      name: "logger",
+      fetch: async (req, ctx) => {
+        await ctx.next();
+        console.log(req.url);
+      },
+    },
+  ],
 });
